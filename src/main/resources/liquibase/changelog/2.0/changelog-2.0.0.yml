@@ -1,0 +1,53 @@
+databaseChangeLog:
+  - changeSet:
+      id: create-reservation-table
+      author: laman
+      changes:
+        - createTable:
+            tableName: reservation
+            columns:
+
+              - column:
+                  name: reservation_id
+                  type: INT
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+
+              - column:
+                  name: movie_id
+                  type: INT
+                  constraints:
+                    nullable: false
+
+              - column:
+                  name: user_id
+                  type: INT
+                  constraints:
+                    nullable: false
+
+              - column:
+                  name: reservation_status
+                  type: VARCHAR(50)
+                  constraints:
+                    nullable: false
+
+              - column:
+                  name: approved_status
+                  type: BOOLEAN
+                  constraints:
+                    nullable: false
+
+              - column:
+                  name: reservation_date
+                  type: TIMESTAMP
+                  constraints:
+                    nullable: false
+
+              - column:
+                  name: request_seats
+                  type: INT
+                  constraints:
+                    nullable: false
+

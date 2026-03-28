@@ -1,0 +1,46 @@
+databaseChangeLog:
+  - changeSet:
+      id: create-movie-table
+      author: laman
+      changes:
+        - createTable:
+            tableName: movie
+            columns:
+
+              - column:
+                  name: id
+                  type: INT
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+
+              - column:
+                  name: title
+                  type: VARCHAR(255)
+                  constraints:
+                    nullable: false
+
+              - column:
+                  name: genre
+                  type: VARCHAR(50)
+                  constraints:
+                    nullable: false
+
+              - column:
+                  name: total_seats
+                  type: INT
+                  constraints:
+                    nullable: false
+
+              - column:
+                  name: available_seats
+                  type: INT
+                  constraints:
+                    nullable: false
+
+              - column:
+                  name: created_at
+                  type: TIMESTAMP
+                  constraints:
+                    nullable: false
