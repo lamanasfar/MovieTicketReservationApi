@@ -5,6 +5,7 @@ import com.example.movieticketreservationsystem.constants.UserRoles;
 import com.example.movieticketreservationsystem.dto.ReservationRequestDto;
 import com.example.movieticketreservationsystem.entity.MovieEntity;
 import com.example.movieticketreservationsystem.entity.UserEntity;
+import com.example.movieticketreservationsystem.exception.*;
 import com.example.movieticketreservationsystem.mapper.ReservationMapper;
 import com.example.movieticketreservationsystem.repository.MovieRepository;
 import com.example.movieticketreservationsystem.repository.ReservationRepository;
@@ -42,13 +43,13 @@ public class ReservationService {
     }
 
     public void reservationApproved(int reservationId,int adminId){
-        var admin = userRepository.findById(adminId).orElseThrow(() -> new RuntimeException("admin not found"));
+        var admin = userRepository.findById(adminId).orElseThrow(() -> new AdminNotFoundException("Admin not found"));
         if(admin.getRole() == UserRoles.ADMIN){
             var reservation = reservationRepository.findById(reservationId)
-                    .orElseThrow(() -> new RuntimeException("Reservation not found"));
+                    .orElseThrow(() -> new ReservationNotFoundException("Reservation not found"));
             var movie = checkMovieExists(reservation.getMovieId());
             if(movie.getAvailableSeats() < reservation.getRequestSeats())
-                throw new RuntimeException("Not enough available seats");
+                throw new NotAvailableSeatsException("Not enough available seats");
             reservation.setReservationStatus(ReservationStatus.APPROVED);
             movie.setAvailableSeats(movie.getAvailableSeats() - reservation.getRequestSeats());
 
@@ -64,7 +65,7 @@ public class ReservationService {
     private UserEntity checkUserExists(int userId){
         var user =userRepository.findById(userId);
         if(user.isEmpty())
-            throw new RuntimeException("user not found");//globala cevir
+            throw new UserNotFoundException("User not found!");
 
         return user.get();
     }
@@ -77,7 +78,7 @@ public class ReservationService {
     private MovieEntity checkMovieExists(int movieId){
         var movie =movieRepository.findById(movieId);
         if(movie.isEmpty())
-            throw new RuntimeException("movie not found");//globall
+            throw new MovieNotFoundException("Movie not found");
         return movie.get();
     }
 
