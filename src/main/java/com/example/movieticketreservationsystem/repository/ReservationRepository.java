@@ -13,5 +13,5 @@ import java.util.List;
 @Repository
 public interface ReservationRepository  extends JpaRepository<ReservationEntity,Integer> {
 
-  //  void deleteByStatusAndCreatedAtBefore(ReservationStatus reservationStatus, LocalDateTime reservationDate);
+
 }
