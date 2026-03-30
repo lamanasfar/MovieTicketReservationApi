@@ -14,6 +14,8 @@ import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
+
 @Service
 @RequiredArgsConstructor
 @Transactional
@@ -41,6 +43,22 @@ public class ReservationService {
 
         reservationRepository.save(reservation);
     }
+
+
+    public void deletePendingReservation(){
+       var reservation = reservationRepository.findAll();
+       if(!reservation.isEmpty()){
+           reservation.stream()
+                   .filter(r ->r.getReservationStatus() ==ReservationStatus.PENDING)
+                   .filter(r ->r.getReservationDate().isBefore(LocalDateTime.now().minusHours(1)))
+                   .forEach(r ->reservationRepository.delete(r));
+
+       }
+       else
+           System.out.println("No reservasion");
+
+    }
+
 
     public void reservationApproved(int reservationId,int adminId){
         var admin = userRepository.findById(adminId).orElseThrow(() -> new AdminNotFoundException("Admin not found"));

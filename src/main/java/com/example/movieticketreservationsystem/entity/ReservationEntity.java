@@ -2,10 +2,7 @@ package com.example.movieticketreservationsystem.entity;
 
 import com.example.movieticketreservationsystem.constants.ReservationStatus;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import java.time.LocalDateTime;
 
@@ -13,8 +10,9 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @Getter
 @Setter
+@ToString
 @Entity
-@Table(name = "reservations")
+@Table(name = "reservation")
 public class ReservationEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
