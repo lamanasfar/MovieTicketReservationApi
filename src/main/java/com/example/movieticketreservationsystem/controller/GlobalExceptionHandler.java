@@ -11,15 +11,21 @@ import static org.springframework.http.HttpStatus.*;
 @RestControllerAdvice
 public class GlobalExceptionHandler {
 
-    @ExceptionHandler({
-            UserNotFoundException.class,
-            MovieNotFoundException.class,
-            AdminNotFoundException.class
-    })
+//    @ExceptionHandler({
+//            UserNotFoundException.class,
+//            MovieNotFoundException.class,
+//            AdminNotFoundException.class
+//    })
+//    @ResponseStatus(NOT_FOUND)
+//    public ExceptionResponse handleNotFoundExceptions(RuntimeException exception) {
+//        return new ExceptionResponse(ExceptionCodes.NOT_FOUND, exception.getMessage());
+//    }
+    @ExceptionHandler(ReservationNotFoundException.class)
     @ResponseStatus(NOT_FOUND)
-    public ExceptionResponse handleNotFoundExceptions(RuntimeException exception) {
+    public ExceptionResponse handleNotFoundExceptionsss(ReservationNotFoundException exception) {
         return new ExceptionResponse(ExceptionCodes.NOT_FOUND, exception.getMessage());
     }
+
     @ExceptionHandler(NotAvailableSeatsException.class)
     @ResponseStatus(BAD_REQUEST)
     public ExceptionResponse handleNotAvailableSeatsException(NotAvailableSeatsException exception) {

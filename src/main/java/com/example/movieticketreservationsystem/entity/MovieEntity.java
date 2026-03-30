@@ -15,7 +15,7 @@ import java.time.LocalDateTime;
 @Getter
 @Setter
 @Entity
-@Table(name = "movies")
+@Table(name = "movie")
 
 public class MovieEntity {
     @Id
@@ -29,7 +29,7 @@ public class MovieEntity {
     private MovieGenres genre;
     @Column(name = "total_seats")
     private int totalSeats;
-    @Column(name = "avaliable_seats")
+    @Column(name = "available_seats")
     private int availableSeats;
     @Column(name = "created_at")
     private LocalDateTime creationDate;

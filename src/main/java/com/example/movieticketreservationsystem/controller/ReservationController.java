@@ -23,4 +23,10 @@ public class ReservationController {
         reservationService.reservationApproved(reservationId,adminId);
     }
 
+    //test
+    @DeleteMapping("/deletePending")
+    public void deleteOldReservations() {
+        reservationService.deletePendingReservation();
+    }
+
 }
